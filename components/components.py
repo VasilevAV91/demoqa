@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 
+
+
 class WebElement:
 
     def __init__(self, driver, locator = '', locator_type = 'css'):
@@ -17,6 +19,9 @@ class WebElement:
 
     def find_element(self):
         return self.driver.find_element(self.get_by_type(), self.locator)
+
+    def get_child(self):
+        return len(self.driver.find_elements(self.get_by_type(), self.locator))
 
     def find_elements(self):
         return self.driver.find_elements(self.get_by_type(), self.locator)
@@ -39,6 +44,9 @@ class WebElement:
             return True
         return False
 
+    def get_row_by_index(self, index: int):
+        return self.driver.find_element
+
     def send_keys(self, text: str):
         self.find_element().send_keys(text)
 
@@ -55,6 +63,9 @@ class WebElement:
             return value
         return True
 
+    def check_css(self, style, value = ''):
+        return self.find_element().value_of_css_property(style) == value
+    
     def scroll_to_element(self):
         self.driver.execute_script(
             'window.scrollTo(0, document.body.scrollHeight);',
